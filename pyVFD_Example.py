@@ -41,7 +41,7 @@ def example_routine():
 		sec2 = seconds[1]
 
 	if microseconds == '10':
-		micro = 0
+		micro = '0'
 	else:
 		micro = microseconds
 
@@ -61,7 +61,7 @@ def example_routine():
 	dsec2.char(sec2).pack(side=tk.LEFT)
 	dmicro.char(micro).pack(side=tk.LEFT)
 
-	root.after(100, function=example_routine())
+	root.after(100, example_routine)
 
 
 ## EXECUTABLE ## 
