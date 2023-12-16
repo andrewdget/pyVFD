@@ -1,11 +1,12 @@
 ## NOTES ##
 '''
-1. need to add method for passing canvas options to pyVFD/VFD
-2. need to add functions for resizing images
-3. need to add method for setting display size based on desired width/height
+1. need to add method for passing canvas options to pyVFD/VFD (.config())
+2. need to add method for setting display size based on desired width/height
 	(maintain aspect ratio)
-4. develop method for changing display/off colors
-5. look at create_image anchor location as user option (w/ default selection)
+3. develop method for changing display/off colors
+4. look at create_image anchor location as user option (w/ default selection)
+5. fix gaps in graphic. 
+
 '''
 
 ## DEPENDENCIES ## 
@@ -136,6 +137,55 @@ class pyVFD:
 	def clear(self):
 		self.object.delete('all')
 		return self.object
+
+	def bgcolor(r, g, b):
+		segs = [
+			'segA_off',
+			'segB_off',
+			'segC_off',
+			'segD_off',
+			'segE_off',
+			'segF_off',
+			'segG_off'
+			]
+
+		for tgt in segs:
+			path = './Graphics/Modified/M' + tgt + '.png'
+			seg = Image.open(path)
+
+			o_r, o_g, o_b, a = seg.split()
+
+			n_r = o_r.point(lambda i: r)
+			n_g = o_g.point(lambda i: g)
+			n_b = o_b.point(lambda i: b)
+
+			new_seg = Image.merge('RGBA', (n_r, n_g, n_b, a))
+			new_seg.save(path)
+
+	def fgcolor(r, g, b):
+		segs = [
+			'segA_on',
+			'segB_on',
+			'segC_on',
+			'segD_on',
+			'segE_on',
+			'segF_on',
+			'segG_on'
+			]
+
+		for tgt in segs:
+			path = './Graphics/Modified/M' + tgt + '.png'
+			seg = Image.open(path)
+
+			o_r, o_g, o_b, a = seg.split()
+
+			n_r = o_r.point(lambda i: r)
+			n_g = o_g.point(lambda i: g)
+			n_b = o_b.point(lambda i: b)
+
+			new_seg = Image.merge('RGBA', (n_r, n_g, n_b, a))
+			new_seg.save(path)
+
 
 	def resize(factor):
 		graphic_list = [

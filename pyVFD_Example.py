@@ -11,7 +11,7 @@ import datetime
 import time
 
 ## DEFINITIONS ##
-
+ 
 def example_routine():
 	current = datetime.datetime.now()
 	hours = str(current.hour)
@@ -65,6 +65,10 @@ def example_routine():
 
 
 ## EXECUTABLE ## 
+
+pyVFD.resize(0.1)
+pyVFD.fgcolor(204, 246, 250)
+pyVFD.bgcolor(59, 56, 56)
 
 root = tk.Tk()
 root.title('pyVFD Example')
