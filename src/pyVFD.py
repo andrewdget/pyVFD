@@ -236,6 +236,67 @@ disp.control([1, 1, 1, 1, 1, 1, 1]).pack(side=tk.LEFT)
 
 root.mainloop()
 
+# def loadgraphics(path_roster):
+# 	graphic_names = list(path_roster.keys())
+# 	graphic_roster = {}
+# 	for name in graphic_names:
+# 		path = path_roster[name]
+# 		graphic = Image.open(path)
+# 		graphic_roster[name] = graphic
+# 	return graphic_roster
+
+# def recolor(graphic, color):
+# 	[r, g, b, alpha] = graphic.split()
+# 	red = r.point(lambda i: color[0])
+# 	green = g.point(lambda i: color[1])
+# 	blue = b.point(lambda i: color[2])
+# 	recolored_graphic = Image.merge('RGBA', (red, green, blue, alpha))
+# 	return recolored_graphic
+
+# def batch_recolor(graphic_roster, color):
+# 	graphic_names = list(graphic_roster.keys())
+# 	for name in graphic_names:
+# 		graphic = graphic_roster[name]
+# 		graphic_roster[name] = recolor(graphic, color)
+# 	return graphic_roster
+
+
+# graphic_names = [
+# 	'segA_on',
+# 	'segA_off',
+# 	'segB_on',
+# 	'segB_off',
+# 	'segC_on',
+# 	'segC_off',
+# 	'segD_on',
+# 	'segD_off',
+# 	'segE_on',
+# 	'segE_off',
+# 	'segF_on',
+# 	'segF_off',
+# 	'segG_on',
+# 	'segG_off',
+# 	'segDP_on',
+# 	'segDP_off',
+# 	'segCC_on',
+# 	'segCC_off'
+# 	]
+
+# path_roster = {}
+# for name in graphic_names:
+# 	path = './Graphics/' + name + '.png'
+# 	path_roster[name] = path
+
+# graphic_roster = loadgraphics(path_roster)
+# graphic_roster = batch_recolor(graphic_roster, [255,255,255])
+
+# graphic_names = list(graphic_roster.keys())
+# for name in graphic_names:
+# 	path = path_roster[name]
+# 	graphic = graphic_roster[name]
+# 	graphic.save(path)
+
+
 
 
 
