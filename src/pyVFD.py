@@ -1,6 +1,6 @@
 ## NOTES ##
 '''
-1. add crop functionality
+
 '''
 
 ## DEPENDENCIES ## 
@@ -11,9 +11,18 @@ from PIL import Image, ImageTk
 
 class seg7:
 
-	def __init__(self, parent):
+	def __init__(self, parent, width=None, height=None, 
+		on_color=[204, 246, 250], off_color=[59, 56, 56], bg='black',
+		use_DP=False, use_CC=False):
+
 		self.parent = parent
-		self.config = self.config()
+		self.width = width
+		self.height = height
+		self.on_color = on_color
+		self.off_color = off_color
+		self.bg = bg
+		self.use_DP = use_DP
+		self.use_CC = use_CC
 
 		# generate list of graphics to load from file
 		self.graphic_names = ['segA_on', 'segB_on', 'segC_on', 'segD_on',
@@ -21,10 +30,10 @@ class seg7:
 			'segC_off', 'segD_off', 'segE_off', 'segF_off', 'segG_off',
 			'Grid']
 
-		if self.config['use_DP']:
+		if self.use_DP:
 			self.graphic_names.extend(['segDP_on', 'segDP_off'])
 
-		if self.config['use_CC']:
+		if self.use_CC:
 			self.graphic_names.extend(['segCC_on', 'segCC_off'])
 
 		# generate dictionary of graphic names and their path
@@ -36,41 +45,28 @@ class seg7:
 		self.graphic_roster = self.loadgraphics(self.path_roster)
 		
 		# resize graphics
-		if self.config['use_DP'] == False and self.config['use_CC'] == False:
+		if self.use_DP == False and self.use_CC == False:
 			self.graphic_roster = self.batch_crop(self.graphic_roster, 0.83, 1)
 		self.graphic_roster = self.batch_resize(self.graphic_roster, 
-			width=self.config['width'], height=self.config['height'])
+			width=self.width, height=self.height)
 		self.graphic_dims = self.getdims(self.graphic_roster['segA_on'])
 
 		# recolor graphics
 		for name in self.graphic_names:
 			if 'on' in name:
 				graphic = self.graphic_roster[name]
-				color = self.config['on_color']
+				color = self.on_color
 				self.graphic_roster[name] = self.recolor(graphic, color)
 			elif 'off' in name:
 				graphic = self.graphic_roster[name]
-				color = self.config['off_color']
+				color = self.off_color
 				self.graphic_roster[name] = self.recolor(graphic, color)
 
 		self.disp = tk.Canvas(self.parent, 
 			width=self.graphic_dims[0], height=self.graphic_dims[1],
-			bg=self.config['bg'], highlightthickness=0)
+			bg=self.bg, highlightthickness=0)
 
 		self.graphic_roster = self.Image2PhotoImage(self.graphic_roster)
-
-
-
-
-
-
-
-	def config(self, height=200, width=None, on_color=[204, 246, 250],
-		off_color=[59, 56, 56], bg='black', use_DP=False, use_CC=False):
-		config = {'height': height, 'width': width, 'on_color': on_color,
-			'off_color': off_color, 'bg': bg, 'use_DP': use_DP,
-			'use_CC': use_CC}
-		return config
 		
 
 	def loadgraphics(self, path_roster):
@@ -91,7 +87,8 @@ class seg7:
 
 	def crop(self, graphic, w_ratio, h_ratio):
 		graphic_dims = self.getdims(graphic)
-		cropped_graphic = graphic.crop((0, 0, graphic_dims[0]*w_ratio, graphic_dims[1]*h_ratio))
+		cropped_graphic = graphic.crop((0, 0, graphic_dims[0]*w_ratio,
+			graphic_dims[1]*h_ratio))
 		return cropped_graphic
 
 
@@ -205,7 +202,7 @@ class seg7:
 			segG_off = self.graphic_roster['segG_off']
 			self.disp.create_image(0, 0, image=segG_off, anchor=tk.NW)
 
-		if self.config['use_DP']:
+		if self.use_DP:
 			if DP == 1:
 				segDP_on = self.graphic_roster['segDP_on']
 				self.disp.create_image(0, 0, image=segDP_on, anchor=tk.NW)
@@ -213,7 +210,7 @@ class seg7:
 				segDP_off = self.graphic_roster['segDP_off']
 				self.disp.create_image(0, 0, image=segDP_off, anchor=tk.NW)
 
-		if self.config['use_CC']:
+		if self.use_CC:
 			if CC == 1:
 				segCC_on = self.graphic_roster['segCC_on']
 				self.disp.create_image(0, 0, image=segCC_on, anchor=tk.NW)
@@ -227,78 +224,59 @@ class seg7:
 		return self.disp
 
 
+	def char(self, char, DP=None, CC=None):
+		LUT = {
+			'off': [0,0,0,0,0,0,0],
+
+			'a': [1,1,1,0,1,1,1],
+			'b': [0,0,1,1,1,1,1],
+			'c': [1,0,0,1,1,1,0],
+			'd': [0,1,1,1,1,0,1],
+			'e': [1,0,0,1,1,1,1],
+			'f': [1,0,0,0,1,1,1],
+			'g': [1,0,1,1,1,1,0],
+			'h': [0,0,1,0,1,1,1],
+			'i': [0,0,0,0,1,1,0],
+			'j': [0,1,1,1,1,0,0],
+			'k': [1,0,1,0,1,1,1],
+			'l': [0,0,0,1,1,1,0],
+			'm': [1,0,1,0,1,0,0],
+			'n': [1,1,1,0,1,1,0],
+			'o': [1,1,1,1,1,1,0],
+			'p': [1,1,0,0,1,1,1],
+			'q': [1,1,1,0,0,1,1],
+			'r': [1,1,0,0,1,1,0],
+			's': [1,0,1,1,0,1,1],
+			't': [0,0,0,1,1,1,1],
+			'u': [0,1,1,1,1,1,0],
+			'v': [0,1,1,1,0,1,0],
+			'w': [0,1,0,1,0,1,0],
+			'x': [0,1,1,0,1,1,1],
+			'y': [0,1,1,1,0,1,1],
+			'z': [1,1,0,1,0,0,1],
+
+			'0': [1,1,1,1,1,1,0],
+			'1': [0,1,1,0,0,0,0],
+			'2': [1,1,0,1,1,0,1],
+			'3': [1,1,1,1,0,0,1],
+			'4': [0,1,1,0,0,1,1],
+			'5': [1,0,1,1,0,1,1],
+			'6': [1,0,1,1,1,1,1],
+			'7': [1,1,1,0,0,0,0],
+			'8': [1,1,1,1,1,1,1],
+			'9': [1,1,1,1,0,1,1]
+			}
+
+		self.disp = self.control(LUT[char], DP, CC)
+		return	self.disp
+
+
 ## EXECUTABLE ## 
 root = tk.Tk()
 root.title('pyVFD Test')
 
-disp = seg7(root)
-disp.control([1, 1, 1, 1, 1, 1, 1]).pack(side=tk.LEFT)
+disp = seg7(root, height=200, use_CC=True)
+disp.char('off', CC=0).pack(side=tk.LEFT)
 
 root.mainloop()
-
-# def loadgraphics(path_roster):
-# 	graphic_names = list(path_roster.keys())
-# 	graphic_roster = {}
-# 	for name in graphic_names:
-# 		path = path_roster[name]
-# 		graphic = Image.open(path)
-# 		graphic_roster[name] = graphic
-# 	return graphic_roster
-
-# def recolor(graphic, color):
-# 	[r, g, b, alpha] = graphic.split()
-# 	red = r.point(lambda i: color[0])
-# 	green = g.point(lambda i: color[1])
-# 	blue = b.point(lambda i: color[2])
-# 	recolored_graphic = Image.merge('RGBA', (red, green, blue, alpha))
-# 	return recolored_graphic
-
-# def batch_recolor(graphic_roster, color):
-# 	graphic_names = list(graphic_roster.keys())
-# 	for name in graphic_names:
-# 		graphic = graphic_roster[name]
-# 		graphic_roster[name] = recolor(graphic, color)
-# 	return graphic_roster
-
-
-# graphic_names = [
-# 	'segA_on',
-# 	'segA_off',
-# 	'segB_on',
-# 	'segB_off',
-# 	'segC_on',
-# 	'segC_off',
-# 	'segD_on',
-# 	'segD_off',
-# 	'segE_on',
-# 	'segE_off',
-# 	'segF_on',
-# 	'segF_off',
-# 	'segG_on',
-# 	'segG_off',
-# 	'segDP_on',
-# 	'segDP_off',
-# 	'segCC_on',
-# 	'segCC_off'
-# 	]
-
-# path_roster = {}
-# for name in graphic_names:
-# 	path = './Graphics/' + name + '.png'
-# 	path_roster[name] = path
-
-# graphic_roster = loadgraphics(path_roster)
-# graphic_roster = batch_recolor(graphic_roster, [255,255,255])
-
-# graphic_names = list(graphic_roster.keys())
-# for name in graphic_names:
-# 	path = path_roster[name]
-# 	graphic = graphic_roster[name]
-# 	graphic.save(path)
-
-
-
-
-
-
 
