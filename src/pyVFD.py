@@ -4,7 +4,7 @@
 '''
 
 ## DEPENDENCIES ## 
-import tkinter as tk
+from tkinter import Canvas, NW
 from PIL import Image, ImageTk
 
 ## DEFINITIONS ##
@@ -62,7 +62,7 @@ class seg7:
 				color = self.off_color
 				self.graphic_roster[name] = self.recolor(graphic, color)
 
-		self.disp = tk.Canvas(self.parent, 
+		self.disp = Canvas(self.parent, 
 			width=self.graphic_dims[0], height=self.graphic_dims[1],
 			bg=self.bg, highlightthickness=0)
 
@@ -107,13 +107,13 @@ class seg7:
 			resized_graphic = graphic.resize(newsize)
 		elif width != None and height == None:
 			aspect = w/h
-			height = int(width/aspect)
-			newsize = (width, height)
+			new_height = int(width/aspect)
+			newsize = (width, new_height)
 			resized_graphic = graphic.resize(newsize)
 		elif width == None and height != None:
 			aspect = w/h
-			width = int(height * aspect)
-			newsize = (width, height)
+			new_width = int(height * aspect)
+			newsize = (new_width, height)
 			resized_graphic = graphic.resize(newsize)
 		else:
 			resized_graphic = graphic
@@ -124,7 +124,7 @@ class seg7:
 		graphic_names = list(graphic_roster.keys())
 		for name in graphic_names:
 			graphic = graphic_roster[name]
-			graphic_roster[name] = self.resize(graphic, height, width)
+			graphic_roster[name] = self.resize(graphic, width, height)
 		return graphic_roster
 
 
@@ -155,71 +155,71 @@ class seg7:
 	def control(self, switches, DP=None, CC=None):
 		if switches[0] == 1:
 			segA_on = self.graphic_roster['segA_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
 		else:
 			segA_off = self.graphic_roster['segA_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
 
 		if switches[1] == 1:
 			segB_on = self.graphic_roster['segB_on']
-			self.disp.create_image(0, 0, image=segB_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segB_on, anchor=NW)
 		else:
 			segB_off = self.graphic_roster['segB_off']
-			self.disp.create_image(0, 0, image=segB_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segB_off, anchor=NW)
 
 		if switches[2] == 1:
 			segC_on = self.graphic_roster['segC_on']
-			self.disp.create_image(0, 0, image=segC_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segC_on, anchor=NW)
 		else:
 			segC_off = self.graphic_roster['segC_off']
-			self.disp.create_image(0, 0, image=segC_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segC_off, anchor=NW)
 
 		if switches[3] == 1:
 			segD_on = self.graphic_roster['segD_on']
-			self.disp.create_image(0, 0, image=segD_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segD_on, anchor=NW)
 		else:
 			segD_off = self.graphic_roster['segD_off']
-			self.disp.create_image(0, 0, image=segD_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segD_off, anchor=NW)
 
 		if switches[4] == 1:
 			segE_on = self.graphic_roster['segE_on']
-			self.disp.create_image(0, 0, image=segE_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segE_on, anchor=NW)
 		else:
 			segE_off = self.graphic_roster['segE_off']
-			self.disp.create_image(0, 0, image=segE_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segE_off, anchor=NW)
 
 		if switches[5] == 1:
 			segF_on = self.graphic_roster['segF_on']
-			self.disp.create_image(0, 0, image=segF_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segF_on, anchor=NW)
 		else:
 			segF_off = self.graphic_roster['segF_off']
-			self.disp.create_image(0, 0, image=segF_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segF_off, anchor=NW)
 
 		if switches[6] == 1:
 			segG_on = self.graphic_roster['segG_on']
-			self.disp.create_image(0, 0, image=segG_on, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segG_on, anchor=NW)
 		else:
 			segG_off = self.graphic_roster['segG_off']
-			self.disp.create_image(0, 0, image=segG_off, anchor=tk.NW)
+			self.disp.create_image(0, 0, image=segG_off, anchor=NW)
 
 		if self.use_DP:
 			if DP == 1:
 				segDP_on = self.graphic_roster['segDP_on']
-				self.disp.create_image(0, 0, image=segDP_on, anchor=tk.NW)
+				self.disp.create_image(0, 0, image=segDP_on, anchor=NW)
 			else:
 				segDP_off = self.graphic_roster['segDP_off']
-				self.disp.create_image(0, 0, image=segDP_off, anchor=tk.NW)
+				self.disp.create_image(0, 0, image=segDP_off, anchor=NW)
 
 		if self.use_CC:
 			if CC == 1:
 				segCC_on = self.graphic_roster['segCC_on']
-				self.disp.create_image(0, 0, image=segCC_on, anchor=tk.NW)
+				self.disp.create_image(0, 0, image=segCC_on, anchor=NW)
 			else:
 				segCC_off = self.graphic_roster['segCC_off']
-				self.disp.create_image(0, 0, image=segCC_off, anchor=tk.NW)
+				self.disp.create_image(0, 0, image=segCC_off, anchor=NW)
 
 		Grid = self.graphic_roster['Grid']
-		self.disp.create_image(0, 0, image=Grid, anchor=tk.NW)
+		self.disp.create_image(0, 0, image=Grid, anchor=NW)
 
 		return self.disp
 
@@ -271,12 +271,17 @@ class seg7:
 		return	self.disp
 
 
+	def clear(self):
+		self.disp.delete('all')
+		return self.disp
+
+
 ## EXECUTABLE ## 
-root = tk.Tk()
-root.title('pyVFD Test')
+# root = tk.Tk()
+# root.title('pyVFD Test')
 
-disp = seg7(root, height=200, use_CC=True)
-disp.char('off', CC=0).pack(side=tk.LEFT)
+# disp = seg7(root, height=200, use_CC=True)
+# disp.char('off', CC=0).pack(side=tk.LEFT)
 
-root.mainloop()
+# root.mainloop()
 
