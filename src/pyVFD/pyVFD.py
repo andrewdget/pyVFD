@@ -39,7 +39,7 @@ class seg7:
 		# generate dictionary of graphic names and their path
 		self.path_roster = {}
 		for name in self.graphic_names:
-			path = './Graphics/' + name + '.png'
+			path = './Graphics/seg7/' + name + '.png'
 			self.path_roster[name] = path
 
 		self.graphic_roster = self.loadgraphics(self.path_roster)
