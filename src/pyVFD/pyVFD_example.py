@@ -44,7 +44,7 @@ def example_routine():
 root = tk.Tk()
 root.title('pyVFD Example')
 
-gh=200
+gh=200 # global height
 
 # build displays
 d_hr1 = pyVFD.seg7(root, height=gh, off_color=[51,0,0], on_color=[255,0,0])
