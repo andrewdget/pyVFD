@@ -71,54 +71,15 @@ class seg7:
 
 
 	def control(self, switches, DP=None, CC=None):
-		if switches[0] == 1:
-			segA_on = self.graphic_roster['segA_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segA_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[1] == 1:
-			segB_on = self.graphic_roster['segB_on']
-			self.disp.create_image(0, 0, image=segB_on, anchor=NW)
-		else:
-			segB_off = self.graphic_roster['segB_off']
-			self.disp.create_image(0, 0, image=segB_off, anchor=NW)
-
-		if switches[2] == 1:
-			segC_on = self.graphic_roster['segC_on']
-			self.disp.create_image(0, 0, image=segC_on, anchor=NW)
-		else:
-			segC_off = self.graphic_roster['segC_off']
-			self.disp.create_image(0, 0, image=segC_off, anchor=NW)
-
-		if switches[3] == 1:
-			segD_on = self.graphic_roster['segD_on']
-			self.disp.create_image(0, 0, image=segD_on, anchor=NW)
-		else:
-			segD_off = self.graphic_roster['segD_off']
-			self.disp.create_image(0, 0, image=segD_off, anchor=NW)
-
-		if switches[4] == 1:
-			segE_on = self.graphic_roster['segE_on']
-			self.disp.create_image(0, 0, image=segE_on, anchor=NW)
-		else:
-			segE_off = self.graphic_roster['segE_off']
-			self.disp.create_image(0, 0, image=segE_off, anchor=NW)
-
-		if switches[5] == 1:
-			segF_on = self.graphic_roster['segF_on']
-			self.disp.create_image(0, 0, image=segF_on, anchor=NW)
-		else:
-			segF_off = self.graphic_roster['segF_off']
-			self.disp.create_image(0, 0, image=segF_off, anchor=NW)
-
-		if switches[6] == 1:
-			segG_on = self.graphic_roster['segG_on']
-			self.disp.create_image(0, 0, image=segG_on, anchor=NW)
-		else:
-			segG_off = self.graphic_roster['segG_off']
-			self.disp.create_image(0, 0, image=segG_off, anchor=NW)
+		for i in range(len(switches)):
+			switch = switches[i]
+			seg = self.graphic_names[i].replace('_on', '')
+			if switch == 1:
+				seg_on = self.graphic_roster[seg + '_on']
+				self.disp.create_image(0, 0, image=seg_on, anchor=NW)
+			else:
+				seg_off = self.graphic_roster[seg + '_off']
+				self.disp.create_image(0, 0, image=seg_off, anchor=NW)
 
 		if self.use_DP:
 			if DP == 1:
@@ -258,117 +219,15 @@ class seg16:
 
 
 	def control(self, switches, DP=None, CC=None):
-		if switches[0] == 1:
-			segA_on = self.graphic_roster['segA1_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segA1_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[1] == 1:
-			segA_on = self.graphic_roster['segA2_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segA2_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)	
-
-		if switches[2] == 1:
-			segA_on = self.graphic_roster['segB_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segB_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[3] == 1:
-			segA_on = self.graphic_roster['segC_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segC_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[4] == 1:
-			segA_on = self.graphic_roster['segD1_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segD1_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[5] == 1:
-			segA_on = self.graphic_roster['segD2_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segD2_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[6] == 1:
-			segA_on = self.graphic_roster['segE_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segE_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[7] == 1:
-			segA_on = self.graphic_roster['segF_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segF_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[8] == 1:
-			segA_on = self.graphic_roster['segG1_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segG1_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[9] == 1:
-			segA_on = self.graphic_roster['segG2_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segG2_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[10] == 1:
-			segA_on = self.graphic_roster['segH_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segH_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[11] == 1:
-			segA_on = self.graphic_roster['segI_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segI_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[12] == 1:
-			segA_on = self.graphic_roster['segJ_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segJ_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[13] == 1:
-			segA_on = self.graphic_roster['segK_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segK_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[14] == 1:
-			segA_on = self.graphic_roster['segL_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segL_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
-
-		if switches[15] == 1:
-			segA_on = self.graphic_roster['segM_on']
-			self.disp.create_image(0, 0, image=segA_on, anchor=NW)
-		else:
-			segA_off = self.graphic_roster['segM_off']
-			self.disp.create_image(0, 0, image=segA_off, anchor=NW)
+		for i in range(len(switches)):
+			switch = switches[i]
+			seg = self.graphic_names[i].replace('_on', '')
+			if switch == 1:
+				seg_on = self.graphic_roster[seg + '_on']
+				self.disp.create_image(0, 0, image=seg_on, anchor=NW)
+			else:
+				seg_off = self.graphic_roster[seg + '_off']
+				self.disp.create_image(0, 0, image=seg_off, anchor=NW)
 
 		if self.use_DP:
 			if DP == 1:
