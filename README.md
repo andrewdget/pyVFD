@@ -24,146 +24,111 @@ Install pyVFD with **pip**:
 
 ## Usage
 
-<ul style='list-style: none;'>
-	<li>class <font color='red'><b><code>pyVFD.seg7</code></b></font><b><code>(parent, **kw):</code></b>
-		<ul style='list-style: none;'>
-			<li>Tkitner-compatable 7-Segment VFD/LCD like display that can be used everywhere Tkinter expects a canvas object.</li>
-			<li><br></li>
-	 		<li>PARAMETERS:</li>
-		 		<ul style='list-style: none;'>	 
-		 			<li><b>parent</b> - Parent Tkinter object.</li>
-					<li><br></li>
-					<li><b>width</b> - Display width in pixles. <i>Note: If only one display dimension parameter is passed (i.e. width but not height or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.</i></li>
-					<li><br></li>
-					<li><b>height</b> - Display height in pixles. <i>Note: If only one display dimension parameter is passed (i.e. height but not width or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.</i></li>
-					<li><br></li>
-					<li><b>on_color</b> - The color of the display segments which are "switched on" as expressed as an RGB row vector i.e <code>[red, green, blue]</code> where each color is represented as a number between 0 and 255 <i>(default: <code>on_color=[204, 246, 250]</code>).</i></li>
-					<li><br></li>
-					<li><b>off_color</b> - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. <code>[red, green, blue]</code> where each color is represented as a number between 0 and 255 <i>(default: <code>off_color=[59, 56, 56]</code>).</i></li>
-					<li><br></li>
-					<li><b>bg</b> - Background color of display canvas, accepts all standard Tkinter color inputs, including locally defined standard color names and 4/8/12 bit hexadecimal RGB color formats<i>(default: <code>bg='black'</code>).</i></li>
-					<li><br></li>
-					<li><b>use_DP</b> - If <code>True</code> the display will include a decimal point segment <i>(default: <code>use_DP=False</code>).</i></li>
-					<li><br></li>
-					<li><b>use_CC</b> - If <code>True</code> the display will include colon segments <i>(default: <code>use_CC=False</code>).</i></li>
-					<li><br></li>
-					<li><b>use_Grid</b> - If <code>False</code> the display will not include a visual "grid" making the display look more LCD like <i>(default: <code>use_Grid=True</code>).</i></li>
-					<li><br></li>
-				</ul>
-			</li>	
-			<li><font color='red'><b><code>.control</code></b></font><b><code>(switches, **kw)</code></b>
-				<ul style='list-style: none;'>
-					<li>This method is used to directly control which segments of the display are "switched" on or off. <i>Note: If nither this method or the <code>.char()</code> method are used the display will exist internally, but it will not be vissible on the screen as the state (i.e. on or off) of the display's segment will be indeterminate.</i></li>
-					<li><br></li>
-					<li>PARAMETERS:
-						<ul style='list-style: none;'>
-							<li><b>switches</b> - A row vector with 7 elements, each describing the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the coresponding segment of the display in alphabetical order from A-G according to the diagram below. <i>Note: Control over decimal point and/or colon segments is handled seperatly via the parameters below.</i></li>
-								<p align='center'>
-									<img src='https://upload.wikimedia.org/wikipedia/commons/e/ed/7_Segment_Display_with_Labeled_Segments.svg' alt='Segment names of a 7-Segment display with an eighth Decimal Point segment.' width='auto' height='200'><sup>[2]</sup>
-								</p>
-							<li><br></li>
-							<li><b>DP</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. <code>pyVFD.seg7(parent, use_DP=True)</code>).</li>
-							<li><br></li>
-							<li><b>CC</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. <code>pyVFD.seg7(parent, use_CC=True)</code>.</li>
-							<li><br></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li><font color='red'><b><code>.char</code></b></font><b><code>(char, **kw)</code></b>
-				<ul style='list-style: none;'>
-					<li>This method is used to automaticaly display common alpha-numeric characters. Alpha-numeric characters supported by <code>.seg7()</code> are capital A-Z and 0-9. <i>Note: 7-Segment displays are best suited for numeral-only displays. For displays required to represent alphabetical characters, 16-Segment display are recomended. (see Background section for more)</i></li>
-					<li><br></li>
-					<li>PARAMETERS:
-						<ul style='list-style: none;'>
-							<li><b>char</b> - A single alpha-numeric string character (i.e. <code>'A'</code> or <code>'9'</code>), see above for supported characters.</li>
-							<li><br></li>
-							<li><b>DP</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. <code>pyVFD.seg7(parent, use_DP=True)</code>).</li>
-							<li><br></li>
-							<li><b>CC</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. <code>pyVFD.seg7(parent, use_CC=True)</code>.</li>
-							<li><br></li>
-						</ul>
-					</li>
-				</ul>	
-			</li>
-			<li><font color='red'><b><code>.clear</code></b></font><b><code>()</code></b>
-				<ul style='list-style: none;'>
-					<li>This method resets the state of the display after being set and must be called before either <code>.control()</code> or <code>.char()</code> can used again on an existing display.</li>	
-					<li><br></li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-	<li>class <font color='red'><b><code>pyVFD.seg16</code></b></font><b><code>(parent, **kw):</code></b>
-		<ul style='list-style: none;'>
-			<li>Tkitner-compatable 16-Segment VFD/LCD like display that can be used everywhere Tkinter expects a canvas object.</li>
-			<li><br></li>
-	 		<li>PARAMETERS:</li>
-		 		<ul style='list-style: none;'>	 
-		 			<li><b>parent</b> - Parent Tkinter object.</li>
-					<li><br></li>
-					<li><b>width</b> - Display width in pixles. <i>Note: If only one display dimension parameter is passed (i.e. width but not height or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.</i></li>
-					<li><br></li>
-					<li><b>height</b> - Display height in pixles. <i>Note: If only one display dimension parameter is passed (i.e. height but not width or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.</i></li>
-					<li><br></li>
-					<li><b>on_color</b> - The color of the display segments which are "switched on" as expressed as an RGB row vector i.e <code>[red, green, blue]</code> where each color is represented as a number between 0 and 255 <i>(default: <code>on_color=[204, 246, 250]</code>).</i></li>
-					<li><br></li>
-					<li><b>off_color</b> - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. <code>[red, green, blue]</code> where each color is represented as a number between 0 and 255 <i>(default: <code>off_color=[59, 56, 56]</code>).</i></li>
-					<li><br></li>
-					<li><b>bg</b> - Background color of display canvas, accepts all standard Tkinter color inputs, including locally defined standard color names and 4/8/12 bit hexadecimal RGB color formats<i>(default: <code>bg='black'</code>).</i></li>
-					<li><br></li>
-					<li><b>use_DP</b> - If <code>True</code> the display will include a decimal point segment <i>(default: <code>use_DP=False</code>).</i></li>
-					<li><br></li>
-					<li><b>use_CC</b> - If <code>True</code> the display will include colon segments <i>(default: <code>use_CC=False</code>).</i></li>
-					<li><br></li>
-					<li><b>use_Grid</b> - If <code>False</code> the display will not include a visual "grid" making the display look more LCD like <i>(default: <code>use_Grid=True</code>).</i></li>
-					<li><br></li>
-				</ul>
-			</li>	
-			<li><font color='red'><b><code>.control</code></b></font><b><code>(switches, **kw)</code></b>
-				<ul style='list-style: none;'>
-					<li>This method is used to directly control which segments of the display are "switched" on or off. <i>Note: If nither this method or the <code>.char()</code> method are used the display will exist internally, but it will not be vissible on the screen as the state (i.e. on or off) of the display's segment will be indeterminate.</i></li>
-					<li><br></li>
-					<li>PARAMETERS:
-						<ul style='list-style: none;'>
-							<li><b>switches</b> - A row vector with 16 elements, each describing the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the coresponding segment of the display in alphabetical order from A-M (and applicable sub-segments) according to the diagram below. <i>Note: Control over decimal point and/or colon segments is handled seperatly via the parameters below.</i></li>
-								<p align='center'>
-									<img src='https://upload.wikimedia.org/wikipedia/commons/9/95/16-segmente.png' alt='Segment names of a 16-Segment display with a seventeenth Decimal Point Segment.' width='auto' height='200'> <sup>[3]</sup>
-								</p>
-							<li><br></li>
-							<li><b>DP</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. <code>pyVFD.seg16(parent, use_DP=True)</code>).</li>
-							<li><br></li>
-							<li><b>CC</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. <code>pyVFD.seg16(parent, use_CC=True)</code>.</li>
-							<li><br></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li><font color='red'><b><code>.char</code></b></font><b><code>(char, **kw)</code></b>
-				<ul style='list-style: none;'>
-					<li>This method is used to automaticaly display alpha-numeric characters. Alpha-numeric characters supported by <code>.seg16()</code> are A-Z (capital and lower-case) and 0-9 (see Background section for more).</li>
-					<li><br></li>
-					<li>PARAMETERS:
-						<ul style='list-style: none;'>
-							<li><b>char</b> - A single alpha-numeric string character (i.e. <code>'A'</code> or <code>'9'</code>), see above for supported characters.</li>
-							<li><br></li>
-							<li><b>DP</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. <code>pyVFD.seg16(parent, use_DP=True)</code>).</li>
-							<li><br></li>
-							<li><b>CC</b> - Sets the binary state (i.e. <code>1=on</code>, <code>0=off</code>) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. <code>pyVFD.seg16(parent, use_CC=True)</code>.</li>
-							<li><br></li>
-						</ul>
-					</li>
-				</ul>	
-			</li>
-			<li><font color='red'><b><code>.clear</code></b></font><b><code>()</code></b>
-				<ul style='list-style: none;'>
-					<li>This method resets the state of the display after being set and must be called before either <code>.control()</code> or <code>.char()</code> can used again on an existing display.</li>	
-					<li><br></li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-</ul>
+### 7-Segment Displays
+
+class **```pyVFD.seg7(parent, **kw):```**<br>
+Tkitner-compatable 7-Segment VFD/LCD like display that can be used everywhere Tkinter expects a canvas object.
+
+PARAMETERS:<br>
+**parent** - Parent Tkinter object.
+
+**width** - Display width in pixles. *Note: If only one display dimension parameter is passed (i.e. width but not height or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.*
+
+
+**height** - Display height in pixles. *Note: If only one display dimension parameter is passed (i.e. height but not width or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.*
+
+**on_color** - The color of the display segments which are "switched on" as expressed as an RGB row vector i.e ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```on_color=[204, 246, 250]```)*.
+
+**off_color** - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```off_color=[59, 56, 56]```)*.
+
+**bg** - Background color of display canvas, accepts all standard Tkinter color inputs, including locally defined standard color names and 4/8/12 bit hexadecimal RGB color formats *(default: ```bg='black'```)*.
+
+**use_DP** - If ```True``` the display will include a decimal point segment *(default: ```use_DP=False```)*.
+
+**use_CC** - If ```True``` the display will include colon segments *(default: ```use_CC=False```)*.
+
+**use_Grid** - If ```False``` the display will not include a visual "grid" making the display look more LCD like *(default: ```use_Grid=True```)*.
+
+***method*** **```.control(switches, **kw)```**<br>
+This method is used to directly control which segments of the display are "switched" on or off. *Note: If nither this method or the ```.char()``` method are used the display will exist internally, but it will not be vissible on the screen as the state (i.e. on or off) of the display's segment will be indeterminate.*
+
+
+PARAMETERS:<br>
+**switches** - A row vector with 7 elements, each describing the binary state (i.e. ```1=on```, ```0=off```) of the coresponding segment of the display in alphabetical order from A-G according to the diagram below. *Note: Control over decimal point and/or colon segments is handled seperatly via the parameters below.*
+
+<p align='center'>
+	<img src='https://upload.wikimedia.org/wikipedia/commons/e/ed/7_Segment_Display_with_Labeled_Segments.svg' alt='Segment names of a 7-Segment display with an eighth Decimal Point segment.' width='auto' height='200'><sup>[2]</sup>
+</p>
+
+**DP<** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. ```pyVFD.seg7(parent, use_DP=True)```).
+
+**CC** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. ```pyVFD.seg7(parent, use_CC=True)```.
+
+method **```.char(char, **kw)```**<br>
+This method is used to automaticaly display common alpha-numeric characters. Alpha-numeric characters supported by ```.seg7()``` are capital A-Z and 0-9. *Note: 7-Segment displays are best suited for numeral-only displays. For displays required to represent alphabetical characters, 16-Segment display are recomended. (see Background section for more)*
+
+PARAMETERS:<br>
+**char** - A single alpha-numeric string character (i.e. ```'A'``` or ```'9'```), see above for supported characters.
+
+**DP** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. ```pyVFD.seg7(parent, use_DP=True)```.
+
+**CC** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. ```pyVFD.seg7(parent, use_CC=True)```.
+							
+method **```.clear()```**<br>
+This method resets the state of the display after being set and must be called before either ```.control()``` or ```.char()``` can used again on an existing display.	
+
+### 16-Segment Displays
+	
+class **```pyVFD.seg16(parent, **kw):```**<br>
+Tkitner-compatable 16-Segment VFD/LCD like display that can be used everywhere Tkinter expects a canvas object.
+			
+PARAMETERS:<br>
+**parent** - Parent Tkinter object.
+					
+**width** - Display width in pixles. *Note: If only one display dimension parameter is passed (i.e. width but not height or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.*
+					
+**height** - Display height in pixles. *Note: If only one display dimension parameter is passed (i.e. height but not width or vice versa) the unspecified dimension parameter is adjusted automatical to preserve default aspect ratio.*
+					
+**on_color** - The color of the display segments which are "switched on" as expressed as an RGB row vector i.e ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```on_color=[204, 246, 250]```).*
+					
+**off_color** - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```off_color=[59, 56, 56]```).*
+
+**bg** - Background color of display canvas, accepts all standard Tkinter color inputs, including locally defined standard color names and 4/8/12 bit hexadecimal RGB color formats*(default: ```bg='black'```).*
+
+**use_DP** - If ```True``` the display will include a decimal point segment *(default: ```use_DP=False```).*
+
+**use_CC** - If ```True``` the display will include colon segments *(default: ```use_CC=False```).*
+
+**use_Grid** - If ```False``` the display will not include a visual "grid" making the display look more LCD like *(default: ```use_Grid=True```).*
+
+Example:
+					
+method **```.control(switches, **kw)```**<br>
+This method is used to directly control which segments of the display are "switched" on or off. *Note: If nither this method or the ```.char()``` method are used the display will exist internally, but it will not be vissible on the screen as the state (i.e. on or off) of the display's segment will be indeterminate.*
+					
+PARAMETERS:<br>
+**switches** - A row vector with 16 elements, each describing the binary state (i.e. ```1=on```, ```0=off```) of the coresponding segment of the display in alphabetical order from A-M (and applicable sub-segments) according to the diagram below. *Note: Control over decimal point and/or colon segments is handled seperatly via the parameters below.*
+
+<p align='center'>
+	<img src='https://upload.wikimedia.org/wikipedia/commons/9/95/16-segmente.png' alt='Segment names of a 16-Segment display with a seventeenth Decimal Point Segment.' width='auto' height='200'> <sup>[3]</sup>
+</p>
+							
+**DP** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. ```pyVFD.seg16(parent, use_DP=True)```).
+
+**CC** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. ```pyVFD.seg16(parent, use_CC=True)```.
+							
+method **```.char(char, **kw)```**<br>
+This method is used to automaticaly display alpha-numeric characters. Alpha-numeric characters supported by ```.seg16()``` are A-Z (capital and lower-case) and 0-9 (see Background section for more).
+					
+PARAMETERS:
+**char** - A single alpha-numeric string character (i.e. ```'A'``` or ```'9'```), see above for supported characters.
+							
+**DP** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the decimal point segment, assuming the decimal point segment was enabled when the display was initialized (i.e. ```pyVFD.seg16(parent, use_DP=True)```).
+							
+**CC** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. ```pyVFD.seg16(parent, use_CC=True)```.
+
+method **```.clear()```**<br>
+This method resets the state of the display after being set and must be called before either ```.control()``` or ```.char()``` can used again on an existing display.	
 
 ## Sample/Example
 
