@@ -49,7 +49,7 @@ PARAMETERS:<br>
 
 **use_Grid** - If ```False``` the display will not include a visual "grid" making the display look more LCD like *(default: ```use_Grid=True```)*.
 
-***method*** **```.control(switches, **kw)```**<br>
+method **```.control(switches, **kw)```**<br>
 This method is used to directly control which segments of the display are "switched" on or off. *Note: If nither this method or the ```.char()``` method are used the display will exist internally, but it will not be vissible on the screen as the state (i.e. on or off) of the display's segment will be indeterminate.*
 
 
@@ -75,7 +75,45 @@ PARAMETERS:<br>
 **CC** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. ```pyVFD.seg7(parent, use_CC=True)```.
 							
 method **```.clear()```**<br>
-This method resets the state of the display after being set and must be called before either ```.control()``` or ```.char()``` can used again on an existing display.	
+This method resets the state of the display after being set and must be called before either ```.control()``` or ```.char()``` can used again on an existing display.
+
+Example:
+
+```
+import tkinter as tk
+import pyVFD
+import time
+
+def change2nine():
+	'''example function for reseting and updating pyVFD displays'''
+
+	# reset display states so they can be updated
+	left_disp.clear()
+	right_disp.clear()
+
+	# update the displays, via both methods, to show the number "9"
+	left_disp.control([1,1,1,1,0,1,1], DP=0, CC=None).pack(side=tk.LEFT)
+	right_disp.char('9', DP=None, CC=0).pack(side=tk.LEFT)
+
+root=tk.Tk()
+root.title('7-Segment Display Example')
+
+# initialize an example displays
+left_disp = pyVFD.seg7(root, height=200, use_DP=True)
+
+right_disp = pyVFD.seg7(root, height=200, use_CC=True)
+
+# disp the number "3" via direct control & using .pack layout management method
+left_disp.control([1,1,1,1,0,0,1], DP=1, CC=None).pack(side=tk.LEFT)
+
+# disp the number "3" via 'char' shortcut
+right_disp.char('3', DP=None, CC=1).pack(side=tk.LEFT)
+
+# after 5 seconds, call function to change display to "9"s
+root.after(5000, change2nine)
+
+root.mainloop()
+```
 
 ### 16-Segment Displays
 	
@@ -100,8 +138,6 @@ PARAMETERS:<br>
 **use_CC** - If ```True``` the display will include colon segments *(default: ```use_CC=False```).*
 
 **use_Grid** - If ```False``` the display will not include a visual "grid" making the display look more LCD like *(default: ```use_Grid=True```).*
-
-Example:
 					
 method **```.control(switches, **kw)```**<br>
 This method is used to directly control which segments of the display are "switched" on or off. *Note: If nither this method or the ```.char()``` method are used the display will exist internally, but it will not be vissible on the screen as the state (i.e. on or off) of the display's segment will be indeterminate.*
@@ -128,7 +164,45 @@ PARAMETERS:
 **CC** - Sets the binary state (i.e. ```1=on```, ```0=off```) of the colon segments, assuming the colon segments were enabled when the display was initialized (i.e. ```pyVFD.seg16(parent, use_CC=True)```.
 
 method **```.clear()```**<br>
-This method resets the state of the display after being set and must be called before either ```.control()``` or ```.char()``` can used again on an existing display.	
+This method resets the state of the display after being set and must be called before either ```.control()``` or ```.char()``` can used again on an existing display.
+
+Example:
+
+```
+import tkinter as tk
+import pyVFD
+import time
+
+def change2h():
+	'''example function for reseting and updating pyVFD displays'''
+
+	# reset display states so they can be updated
+	left_disp.clear()
+	right_disp.clear()
+
+	# update the displays, via both methods, to show the letter "H" and "h", respectively
+	left_disp.control([0,0,1,1,0,0,1,1,1,1,0,0,0,0,0,0], DP=0, CC=None).pack(side=tk.LEFT)
+	right_disp.char('h', DP=None, CC=0).pack(side=tk.LEFT)
+
+root=tk.Tk()
+root.title('7-Segment Display Example')
+
+# initialize an example displays
+left_disp = pyVFD.seg16(root, height=200, use_DP=True)
+
+right_disp = pyVFD.seg16(root, height=200, use_CC=True)
+
+# disp the letter "G" via direct control & using .pack layout management method
+left_disp.control([1,1,0,1,1,1,1,1,0,1,0,0,0,0,0,0], DP=1, CC=None).pack(side=tk.LEFT)
+
+# disp the letter "g" via 'char' shortcut
+right_disp.char('g', DP=None, CC=1).pack(side=tk.LEFT)
+
+# after 5 seconds, call function to change display to "H" and "h", respectively
+root.after(5000, change2h)
+
+root.mainloop()
+```
 
 ## Sample/Example
 
