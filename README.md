@@ -39,7 +39,7 @@ PARAMETERS:<br>
 
 **on_color** - The color of the display segments which are "switched on" as expressed as an RGB row vector i.e ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```on_color=[204, 246, 250]```)*.
 
-**off_color** - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```off_color=[59, 56, 56]```)*.
+**off_color** - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```off_color=[32, 32, 32]```)*.
 
 **bg** - Background color of display canvas, accepts all standard Tkinter color inputs, including locally defined standard color names and 4/8/12 bit hexadecimal RGB color formats *(default: ```bg='black'```)*.
 
@@ -129,7 +129,7 @@ PARAMETERS:<br>
 					
 **on_color** - The color of the display segments which are "switched on" as expressed as an RGB row vector i.e ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```on_color=[204, 246, 250]```).*
 					
-**off_color** - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```off_color=[59, 56, 56]```).*
+**off_color** - The color of the display segments which are "switched off" as expressed as an RGB row vectore i.e. ```[red, green, blue]``` where each color is represented as a number between 0 and 255 *(default: ```off_color=[32, 32, 32]```).*
 
 **bg** - Background color of display canvas, accepts all standard Tkinter color inputs, including locally defined standard color names and 4/8/12 bit hexadecimal RGB color formats*(default: ```bg='black'```).*
 

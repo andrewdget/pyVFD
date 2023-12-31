@@ -14,7 +14,7 @@ from tkinter import Canvas, NW
 class seg7:
 
 	def __init__(self, parent, width=None, height=None, 
-		on_color=[204, 246, 250], off_color=[59, 56, 56], bg='black',
+		on_color=[204, 246, 250], off_color=[32, 32, 32], bg='black',
 		use_DP=False, use_CC=False, use_Grid=True):
 
 		self.parent = parent
@@ -56,7 +56,7 @@ class seg7:
 		# resize graphics as required
 		self.graphic_roster = batch_resize(self.graphic_roster, 
 			width=self.width, height=self.height)
-		self.graphic_dims = getdims(self.graphic_roster['Grid'])
+		self.graphic_dims = getdims(self.graphic_roster['segB_on'])
 
 		# recolor graphics
 		for name in self.graphic_names:
@@ -170,7 +170,7 @@ class seg16:
 		# resize graphics as required
 		self.graphic_roster = batch_resize(self.graphic_roster, 
 			width=self.width, height=self.height)
-		self.graphic_dims = getdims(self.graphic_roster['Grid'])
+		self.graphic_dims = getdims(self.graphic_roster['segB_on'])
 
 		# recolor graphics
 		for name in self.graphic_names:
