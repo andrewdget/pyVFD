@@ -15,7 +15,7 @@ class seg7:
 
 	def __init__(self, parent, width=None, height=None, 
 		on_color=[204, 246, 250], off_color=[59, 56, 56], bg='black',
-		use_DP=False, use_CC=False):
+		use_DP=False, use_CC=False, use_Grid=True):
 
 		self.parent = parent
 		self.width = width
@@ -25,18 +25,21 @@ class seg7:
 		self.bg = bg
 		self.use_DP = use_DP
 		self.use_CC = use_CC
+		self.use_Grid = use_Grid
 
 		# generate list of graphics to load from file
 		self.graphic_names = ['segA_on', 'segB_on', 'segC_on', 'segD_on',
 			'segE_on', 'segF_on', 'segG_on', 'segA_off', 'segB_off', 
-			'segC_off', 'segD_off', 'segE_off', 'segF_off', 'segG_off',
-			'Grid']
+			'segC_off', 'segD_off', 'segE_off', 'segF_off', 'segG_off']
 
 		if self.use_DP:
 			self.graphic_names.extend(['segDP_on', 'segDP_off'])
 
 		if self.use_CC:
 			self.graphic_names.extend(['segCC_on', 'segCC_off'])
+
+		if self.use_Grid:
+			self.graphic_names.append('Grid')
 
 		# generate dictionary of graphic names and their path
 		self.path_roster = {}
@@ -46,9 +49,11 @@ class seg7:
 
 		self.graphic_roster = loadgraphics(self.path_roster)
 		
-		# resize graphics
+		# crop graphics as required
 		if self.use_DP == False and self.use_CC == False:
 			self.graphic_roster = batch_crop(self.graphic_roster, 0.83, 1)
+		
+		# resize graphics as required
 		self.graphic_roster = batch_resize(self.graphic_roster, 
 			width=self.width, height=self.height)
 		self.graphic_dims = getdims(self.graphic_roster['Grid'])
@@ -98,8 +103,9 @@ class seg7:
 				segCC_off = self.graphic_roster['segCC_off']
 				self.disp.create_image(0, 0, image=segCC_off, anchor=NW)
 
-		Grid = self.graphic_roster['Grid']
-		self.disp.create_image(0, 0, image=Grid, anchor=NW)
+		if self.use_Grid:
+			Grid = self.graphic_roster['Grid']
+			self.disp.create_image(0, 0, image=Grid, anchor=NW)
 
 		return self.disp
 
@@ -119,7 +125,7 @@ class seg16:
 
 	def __init__(self, parent, width=None, height=None, 
 		on_color=[204, 246, 250], off_color=[59, 56, 56], bg='black',
-		use_DP=False, use_CC=False):
+		use_DP=False, use_CC=False, use_Grid=True):
 
 		self.parent = parent
 		self.width = width
@@ -129,6 +135,7 @@ class seg16:
 		self.bg = bg
 		self.use_DP = use_DP
 		self.use_CC = use_CC
+		self.use_Grid = use_Grid
 
 		# generate list of graphics to load from file
 		self.graphic_names = ['segA1_on', 'segA2_on', 'segB_on', 'segC_on',
@@ -137,13 +144,16 @@ class seg16:
 			'segM_on', 'segA1_off', 'segA2_off', 'segB_off', 'segC_off',
 			'segD1_off', 'segD2_off', 'segE_off', 'segF_off', 'segG1_off',
 			'segG2_off', 'segH_off', 'segI_off', 'segJ_off', 'segK_off',
-			'segL_off', 'segM_off', 'Grid']
+			'segL_off', 'segM_off']
 
 		if self.use_DP:
 			self.graphic_names.extend(['segDP_on', 'segDP_off'])
 
 		if self.use_CC:
 			self.graphic_names.extend(['segCC_on', 'segCC_off'])
+
+		if self.use_Grid:
+			self.graphic_names.append('Grid')
 
 		# generate dictionary of graphic names and their path
 		self.path_roster = {}
@@ -153,9 +163,11 @@ class seg16:
 
 		self.graphic_roster = loadgraphics(self.path_roster)
 
-		# resize graphics
+		# crop graphics as required
 		if self.use_DP == False and self.use_CC == False:
 			self.graphic_roster = batch_crop(self.graphic_roster, 0.83, 1)
+		
+		# resize graphics as required
 		self.graphic_roster = batch_resize(self.graphic_roster, 
 			width=self.width, height=self.height)
 		self.graphic_dims = getdims(self.graphic_roster['Grid'])
@@ -205,8 +217,9 @@ class seg16:
 				segCC_off = self.graphic_roster['segCC_off']
 				self.disp.create_image(0, 0, image=segCC_off, anchor=NW)
 
-		Grid = self.graphic_roster['Grid']
-		self.disp.create_image(0, 0, image=Grid, anchor=NW)
+		if self.use_Grid:
+			Grid = self.graphic_roster['Grid']
+			self.disp.create_image(0, 0, image=Grid, anchor=NW)
 
 		return self.disp
 
