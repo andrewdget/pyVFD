@@ -5,9 +5,10 @@
 
 ## DEPENDENCIES ## 
 
+from tkinter import Canvas, NW
+
 from Utils import *
 from CharLUTs import *
-from tkinter import Canvas, NW
 
 ## DEFINITIONS ##
 
@@ -124,7 +125,7 @@ class seg7:
 class seg16:
 
 	def __init__(self, parent, width=None, height=None, 
-		on_color=[204, 246, 250], off_color=[59, 56, 56], bg='black',
+		on_color=[204, 246, 250], off_color=[32, 32, 32], bg='black',
 		use_DP=False, use_CC=False, use_Grid=True):
 
 		self.parent = parent
