@@ -5,7 +5,7 @@
 
 ## DEPENDENCIES ## 
 
-import pyVFD
+import tkVFD
 import tkinter as tk
 import datetime
 import time
@@ -42,21 +42,21 @@ def example_routine():
 ## EXECUTABLE ## 
 
 root = tk.Tk()
-root.title('pyVFD Example')
+root.title('tkVFD Example')
 
 gh=200 # global height
 
 # build displays
-d_hr1 = pyVFD.seg7(root, height=gh, off_color=[51,0,0], on_color=[255,0,0])
-d_hr2 = pyVFD.seg7(root, height=gh, off_color=[51,25,0], on_color=[255,128,0],
+d_hr1 = tkVFD.seg7(root, height=gh, off_color=[51,0,0], on_color=[255,0,0])
+d_hr2 = tkVFD.seg7(root, height=gh, off_color=[51,25,0], on_color=[255,128,0],
 	 use_CC=True)
-d_min1 = pyVFD.seg7(root, height=gh, off_color=[51,51,0], on_color=[255,255,0])
-d_min2 = pyVFD.seg7(root, height=gh, off_color=[25,51,0], on_color=[128,255,0],
+d_min1 = tkVFD.seg7(root, height=gh, off_color=[51,51,0], on_color=[255,255,0])
+d_min2 = tkVFD.seg7(root, height=gh, off_color=[25,51,0], on_color=[128,255,0],
 	use_CC=True)
-d_sec1 = pyVFD.seg7(root, height=gh, off_color=[0,51,51], on_color=[0,255,255])
-d_sec2 = pyVFD.seg7(root, height=gh, off_color=[25,0,51], on_color=[127,0,255],
+d_sec1 = tkVFD.seg7(root, height=gh, off_color=[0,51,51], on_color=[0,255,255])
+d_sec2 = tkVFD.seg7(root, height=gh, off_color=[25,0,51], on_color=[127,0,255],
 	use_DP=True)
-d_mic = pyVFD.seg7(root, height=gh, off_color=[32,32,32], on_color=[255,255,255])
+d_mic = tkVFD.seg7(root, height=gh, off_color=[32,32,32], on_color=[255,255,255])
 
 # set initial condition
 d_hr1.char('off').pack(side=tk.LEFT)
