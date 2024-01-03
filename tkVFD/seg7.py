@@ -7,8 +7,8 @@
 
 from tkinter import Canvas, NW
 
-from utils import *
-from charLUTs import *
+from .utils import *
+from .charLUTs import *
 
 ## DEFINITIONS ##
 
@@ -44,8 +44,9 @@ class seg7:
 
 		# generate dictionary of graphic names and their path
 		self.path_roster = {}
+		rootdir = __file__.replace('seg7.py', '')
 		for name in self.graphic_names:
-			path = './Graphics/seg7/' + name + '.png'
+			path = rootdir + '/Graphics/seg7/' + name + '.png'
 			self.path_roster[name] = path
 
 		self.graphic_roster = loadgraphics(self.path_roster)
