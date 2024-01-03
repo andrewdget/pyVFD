@@ -1,13 +1,5 @@
 # tkVFD
 
->[!NOTE]
->**Note: tkVFD is under development**
->+ **Core module functionality is currently in place.**
->+ **Package has not yet been added to the Python Package Index.**
->+ **Currently working on documentation, non-principle features (i.e. adding a built-in clock display function), and testing.**
->
->**Project is expected to be complete by February 2024**
-
 ## Overview
 
 The [tkVFD module](https://github.com/andrewdget/tkVFD) allows for easy inclusion of customizable segmented alpha-numeric displays into any [Tkinter](https://docs.python.org/3/library/tkinter.html) application and supports both 16-segment and 7-segment geometries.
