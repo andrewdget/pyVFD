@@ -1,8 +1,6 @@
 ## NOTES ##
 '''
-1. adjust seg16 .png colors
-2. establish default color behvior
-3. add changelog
+
 '''
 
 ## DEPENDENCIES ## 
@@ -61,7 +59,7 @@ class seg16:
 		if self.use_DP == False and self.use_CC == False:
 			self.graphic_roster = batch_crop(self.graphic_roster, 0.83, 1)
 		
-		# resize graphics as required
+		# resize graphics
 		self.graphic_roster = batch_resize(self.graphic_roster, 
 			width=self.width, height=self.height)
 		self.graphic_dims = getdims(self.graphic_roster['segB_on'])
