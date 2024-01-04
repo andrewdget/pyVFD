@@ -2,8 +2,7 @@
 '''
 1. adjust seg16 .png colors
 2. establish default color behvior
-3. fix readme images w/ Github URLs or include in local?
-4. add changelog
+3. add changelog
 '''
 
 ## DEPENDENCIES ## 
