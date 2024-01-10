@@ -31,10 +31,6 @@ python3 -m pip install --upgrade pip
 python3 -m pip install tkVFD
 ```
 
-Clone Repository with **git**:
-
-```git clone https://github.com/andrewdget/tkVFD.git```
-
 ## Usage
 
 ### 16-Segment Displays
@@ -125,10 +121,12 @@ left_disp = tkVFD.seg7(root, height=200, use_DP=True)
 right_disp = tkVFD.seg7(root, height=200, use_CC=True)
 
 # disp the number "3" via direct control & using .pack layout management method
-left_disp.control([1,1,1,1,0,0,1], DP=1, CC=None).pack(side=tk.LEFT)
+left_disp.control([1,1,1,1,0,0,1], DP=1, CC=None)
+left_disp.pack(side=tk.LEFT)
 
 # disp the number "3" via 'char' shortcut
-right_disp.char('3', DP=None, CC=1).pack(side=tk.LEFT)
+right_disp.char('3', DP=None, CC=1)
+right_disp.pack(side=tk.LEFT)
 
 # after 5 seconds, call function to change display to "9"s
 root.after(5000, change2nine)
@@ -225,10 +223,12 @@ left_disp = tkVFD.seg16(root, height=200, use_DP=True)
 right_disp = tkVFD.seg16(root, height=200, use_CC=True)
 
 # disp the letter "G" via direct control & using .pack layout management method
-left_disp.control([1,1,0,1,1,1,1,1,0,1,0,0,0,0,0,0], DP=1, CC=None).pack(side=tk.LEFT)
+left_disp.control([1,1,0,1,1,1,1,1,0,1,0,0,0,0,0,0], DP=1, CC=None)
+left_disp.pack(side=tk.LEFT)
 
 # disp the letter "g" via 'char' shortcut
-right_disp.char('g', DP=None, CC=1).pack(side=tk.LEFT)
+right_disp.char('g', DP=None, CC=1)
+right_disp.pack(side=tk.LEFT)
 
 # after 5 seconds, call function to change display to "H" and "h", respectively
 root.after(5000, change2h)

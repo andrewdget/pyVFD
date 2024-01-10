@@ -7,8 +7,8 @@
 
 from tkinter import Canvas, NW
 
-from .utils import *
-from .charLUTs import *
+from .Utils import *
+from .CharLUTs import *
 
 ## DEFINITIONS ##
 
@@ -125,6 +125,14 @@ class seg16:
 	def clear(self):
 		self.disp.delete('all')
 		return self.disp
+
+
+	def __getattr__(self, attr):
+		'''Invoked if the called attribute/method is not found in tkVFD module,
+		looks for the attribute/method in the tkinter module instead. This
+		allows tkVFD display objects to be treated as regular tkinter canvas
+		objects once created.'''
+		return getattr(self.disp, attr)
 
 
 ## EXECUTABLE ## 
